@@ -25,6 +25,16 @@ namespace Full_GRASP_And_SOLID.Library
             this.steps.Remove(step);
         }
 
+        public double GetProductionCost(Product producto,Step step){
+            double total=0;
+            double insumos=0;
+            double equipamiento=0;
+            insumos+=producto.UnitCost;
+            equipamiento+=(step.Time*step.Equipment.HourlyCost)/
+
+            
+        }
+
         public void PrintRecipe()
         {
             Console.WriteLine($"Receta de {this.FinalProduct.Description}:");
