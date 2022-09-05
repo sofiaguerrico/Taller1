@@ -11,7 +11,7 @@ namespace Full_GRASP_And_SOLID.Library
 {
     public class Recipe
     {
-        private ArrayList steps = new ArrayList();
+        public ArrayList steps = new ArrayList();
 
         public Product FinalProduct { get; set; }
 
@@ -20,29 +20,27 @@ namespace Full_GRASP_And_SOLID.Library
             this.steps.Add(step);
         }
 
+        /*El método del calculo del costo de producción lo asigné en la clase de receta ya que es la que tiene la información
+        que requiere el mismo*/
+        public double GetProductionCost()
+        {
+            double total = 0;
+            double insumos = 0;
+            double equipamiento = 0;
+
+            foreach (Step step in this.steps)
+            {
+                insumos += step.Input.UnitCost;
+                equipamiento += (step.Time * (step.Equipment.HourlyCost / 60));
+                total = insumos + equipamiento;
+            }
+            return total;
+        }
+
         public void RemoveStep(Step step)
         {
             this.steps.Remove(step);
         }
 
-        public double GetProductionCost(Product producto,Step step){
-            double total=0;
-            double insumos=0;
-            double equipamiento=0;
-            insumos+=producto.UnitCost;
-            equipamiento+=(step.Time*step.Equipment.HourlyCost)/
-
-            
-        }
-
-        public void PrintRecipe()
-        {
-            Console.WriteLine($"Receta de {this.FinalProduct.Description}:");
-            foreach (Step step in this.steps)
-            {
-                Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
-                    $"usando '{step.Equipment.Description}' durante {step.Time}");
-            }
-        }
     }
 }
